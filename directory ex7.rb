@@ -14,7 +14,7 @@ def input_students
   ]
   
   while true
-    cohort = gets.chomp
+    cohort = gets.chomp.downcase
     if cohort.empty?
       cohort = "unknown"
       break
@@ -34,7 +34,7 @@ def input_students
 
     puts "Please enter #{name}'s cohort"
     while true
-      cohort = gets.chomp
+      cohort = gets.chomp.downcase
       if cohort.empty?
         cohort = "unknown"
         break
