@@ -11,10 +11,6 @@ def input_students
   @students = []
   name = STDIN.gets.chomp
 
-  # file.readlines.each do |line|
-  #   name, cohort = line.chomp.split(',')
-  #     @students << {name: name, cohort: cohort.to_sym}
-
   while !name.empty? do
     students_to_hash(name)
     puts "Now we have #{@students.count} students"
@@ -49,12 +45,15 @@ def process(selection)
   case selection
     when "1"
       @students = input_students
+      puts "student input complete"
     when "2"
       show_students
     when "3"
       save_students
+      puts "student list saved successfully"
     when "4"
       load_students
+      puts "student list loaded successfully"
     when "9"
       exit
     else
