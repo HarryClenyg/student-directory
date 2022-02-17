@@ -30,8 +30,8 @@ end
 def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
-  puts "3. Save the list to students.csv"
-  puts "4. Load the list from students.csv"
+  puts "3. Save the list to .csv"
+  puts "4. Load the list from .csv"
   puts "9. Exit"
 end
 
@@ -77,8 +77,11 @@ def print_footer
 end
 
 def save_students
+  # ask to input filename
+  puts "Please provide filename:"
+  filename = STDIN.gets.chomp
   # open the file for writing
-  file = File.open("students.csv", "w")
+  file = File.open("#{filename}.csv", "w")
   # iterate over the array of students
   @students.each do |student|
     student_data = [student[:name], student[:cohort]]
@@ -88,8 +91,11 @@ def save_students
   file.close
 end
 
-def load_students(filename = "students.csv")
-  file = File.open(filename, "r")
+def load_students
+  # ask to input filename
+  puts "Please provide filename:"
+  filename = STDIN.gets.chomp
+  file = File.open("#{filename}.csv", "r")
   file.readlines.each do |line|
   name, cohort = line.chomp.split(',')
   students_to_hash(name, cohort)
