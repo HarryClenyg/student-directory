@@ -1,5 +1,9 @@
 @students = [] # an empty array accessible to all methods
 
+def students_to_hash(name, cohort= "november")
+    @students << {name: name, cohort: cohort.to_sym}
+end
+
 def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
@@ -7,8 +11,12 @@ def input_students
   @students = []
   name = STDIN.gets.chomp
 
+  # file.readlines.each do |line|
+  #   name, cohort = line.chomp.split(',')
+  #     @students << {name: name, cohort: cohort.to_sym}
+
   while !name.empty? do
-    @students << {name: name, cohort: :november}
+    students_to_hash(name)
     puts "Now we have #{@students.count} students"
 
     name = STDIN.gets.chomp
@@ -85,7 +93,7 @@ def load_students(filename = "students.csv")
   file = File.open(filename, "r")
   file.readlines.each do |line|
   name, cohort = line.chomp.split(',')
-    @students << {name: name, cohort: cohort.to_sym}
+  students_to_hash(name, cohort)
   end
   file.close
 end
@@ -101,6 +109,7 @@ def try_load_students
     exit # quit the program
   end
 end
+
 
 try_load_students
 interactive_menu
