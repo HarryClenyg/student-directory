@@ -70,33 +70,44 @@ def print_footer
 end
 
 def save_students
+  require 'csv'
   # ask to input filename
   puts "Please provide filename:"
   filename = STDIN.gets.chomp
   # open the file for writing
-  file = File.open(filename, "w") do |file|
+  file = CSV.open(filename, "w") do |file|
   # iterate over the array of students
     @students.each do |student|
-      student_data = [student[:name], student[:cohort]]
-      csv_line = student_data.join(",")
-      file.puts csv_line
+      file << [student[:name], student[:cohort]]
     end
   end
   puts "students saved to #{filename}"
 end
 
 def load_students
+  require 'csv'
   # ask to input filename
   puts "Please provide filename:"
   filename = STDIN.gets.chomp
-  file = File.open(filename, "r") do |file|
-    file.readlines.each do |line|
-    name, cohort = line.chomp.split(',')
+  file = CSV.foreach(filename, "r") do |row|
+    name, cohort = row
     students_to_hash(name, cohort)
-    end
   end
   puts "students loaded from #{filename}"
 end
+
+# def load_students
+#   # ask to input filename
+#   puts "Please provide filename:"
+#   filename = STDIN.gets.chomp
+#   file = File.open(filename, "r") do |file|
+#     file.readlines.each do |line|
+#     name, cohort = line.chomp.split(',')
+#     students_to_hash(name, cohort)
+#     end
+#   end
+#   puts "students loaded from #{filename}"
+# end
 
 def try_load_students
   filename = ARGV.first  # first argument from the command line
