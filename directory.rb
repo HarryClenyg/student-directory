@@ -94,20 +94,8 @@ def load_students
     students_to_hash(name, cohort)
   end
   puts "students loaded from #{filename}"
+  source_code
 end
-
-# def load_students
-#   # ask to input filename
-#   puts "Please provide filename:"
-#   filename = STDIN.gets.chomp
-#   file = File.open(filename, "r") do |file|
-#     file.readlines.each do |line|
-#     name, cohort = line.chomp.split(',')
-#     students_to_hash(name, cohort)
-#     end
-#   end
-#   puts "students loaded from #{filename}"
-# end
 
 def try_load_students
   filename = ARGV.first  # first argument from the command line
@@ -119,6 +107,11 @@ def try_load_students
     puts "Sorry, #{filename} doesn't exist."
     exit # quit the program
   end
+end
+
+def source_code
+  File.read(__FILE__)
+  puts __FILE__.to_s
 end
 
 
