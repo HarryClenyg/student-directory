@@ -43,17 +43,10 @@ end
 
 def process(selection)
   case selection
-    when "1"
-      @students = input_students
-      puts "student input complete"
-    when "2"
-      show_students
-    when "3"
-      save_students
-      puts "student list saved successfully"
-    when "4"
-      load_students
-      puts "student list loaded successfully"
+    when "1" then @students = input_students
+    when "2" then show_students
+    when "3" then save_students
+    when "4" then load_students
     when "9"
       exit
     else
@@ -89,6 +82,7 @@ def save_students
     file.puts csv_line
   end
   file.close
+  puts "students saved to #{filename}"
 end
 
 def load_students(filename)
@@ -98,6 +92,7 @@ def load_students(filename)
   students_to_hash(name, cohort)
   end
   file.close
+  puts "students loaded from #{filename}"
 end
 
 def try_load_students
