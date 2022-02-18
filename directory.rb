@@ -91,11 +91,8 @@ def save_students
   file.close
 end
 
-def load_students
-  # ask to input filename
-  puts "Please provide filename:"
-  filename = STDIN.gets.chomp
-  file = File.open("#{filename}.csv", "r")
+def load_students(filename)
+  file = File.open(filename, "r")
   file.readlines.each do |line|
   name, cohort = line.chomp.split(',')
   students_to_hash(name, cohort)
@@ -106,7 +103,7 @@ end
 def try_load_students
   filename = ARGV.first  # first argument from the command line
   return if filename.nil? # get out of the method if it isn't given
-  if File.exists!(filename) #if it exists
+  if File.exists?(filename) #if it exists
     load_students(filename)
     puts "Loaded #{@students.count} from #{filename}"
   else # if it doesn't exist
